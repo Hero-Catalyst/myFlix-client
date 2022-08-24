@@ -1,6 +1,7 @@
 //Hook
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { RegistrationView } from '../registration-view/registration-view';
 //Component
 export function LoginView(props) {
   //Calling the useState method with initial value(''), method returns destructured pair values
@@ -28,6 +29,7 @@ export function LoginView(props) {
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
       <button type="submit" onClick={handleSubmit}>Login</button>
+      <button type="submit" onClick={RegistrationView}>Register</button>
     </form>
   );
 }
