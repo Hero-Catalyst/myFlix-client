@@ -1,6 +1,6 @@
 //Hook
 import React, { useState } from 'react';
-
+import PropTypes from 'prop-types';
 //Component
 export function LoginView(props) {
   //Calling the useState method with initial value(''), method returns destructured pair values
@@ -27,62 +27,15 @@ export function LoginView(props) {
         Password:
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
-      <button type="submit" onClick={handleSubmit}>Submit</button>
+      <button type="submit" onClick={handleSubmit}>Login</button>
     </form>
   );
 }
 
-/* code before implementing the {useState} hook
-
-export class LoginView extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      username: '',
-      password: '',
-    };
-
-    this.onUsernameChange = this.onUsernameChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  onUsernameChange(event) {
-    this.setState({
-      username: event.target.value
-    });
-  }
-
-  onPasswordChange(event) {
-    this.setState({
-      password: event.target.value
-    });
-  }
-
-  handleSubmit() {
-    const { username, password } = this.state;
-    console.log(username, password);
-    /* Send a request to the server for authentication
-    then call this.props.onLoggedIn(username) 
-    // this.props.onLoggedIn(usersname); 
-  }
-
-  render() {
-    return (
-      <form>
-        <label>
-          Username:
-          <input type="text" value={this.state.username}
-            onChange={this.onUsernameChange} />
-        </label>
-        <label>
-          Password:
-          <input type="password" value={this.state.password}
-            onChange={this.onPasswordChange} />
-        </label>
-        <button type="button" onClick={this.handleSubmit}>Submit</button>
-      </form>
-    );
-  }
-} */
+LoginView.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired
+  }),
+  onLoggedIn: PropTypes.func.isRequired
+};
