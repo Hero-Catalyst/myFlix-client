@@ -1,4 +1,7 @@
 import React from 'react';
+//use axios to fetch movie database
+import axios from 'axios';
+
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
@@ -6,36 +9,24 @@ import { MovieView } from '../movie-view/movie-view';
 export class MainView extends React.Component {
 
   constructor() {
+    //Super calls the parent "React.Component", which will give the class the actual React compnonent's features
+    //Also initializes the component's "this" variable - super is mandatory for including "constructor()" method in component
     super();
+    //Code executed right when the component is created in memory - happens before "render"
     this.state = {
-      movies: [
-        {
-          _id: 1,
-          Title: 'Inception',
-          Description: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.',
-          Genre: 'Action',
-          Director: 'Christopher Nolan',
-          ImagePath: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/18/Inception_OST.jpg/220px-Inception_OST.jpg'
-        },
-        {
-          _id: 2,
-          Title: 'The Shawshank Redemption',
-          Description: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
-          Genre: 'Drama',
-          Director: 'Frank Darabont',
-          ImagePath: 'https://m.media-amazon.com/images/I/519NBNHX5BL._SY445_.jpg'
-        },
-        {
-          _id: 3,
-          Title: 'Gladiator',
-          Description: 'A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.',
-          Genre: 'Drama',
-          Director: 'Ridley Scott',
-          ImagePath: 'https://play-lh.googleusercontent.com/BFmxSPfvjeuQtqbGn6gNBet8nEm8jc7tQIBKfMMVS4TmstdP1brZIc3Lj0yM-HApGPKVMvv04pYD8bbNgrg=w240-h480-rw'
-        }
-      ],
+      movies: [],
       selectedMovie: null
     };
+  }
+
+  //get request for movies list from heroku
+  componentDidMount() {
+    axios.get('https://myflix-movieapi-76028.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
   }
 
   setSelectedMovie(newSelectedMovie) {
@@ -59,13 +50,19 @@ export class MainView extends React.Component {
             }} />
 
           : movies.map(movie => (
-            <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => {
-              this.setSelectedMovie(movie)
+            <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => {
+              this.setSelectedMovie(newSelectedMovie)
             }} />
           ))
         }
       </div>
     );
   }
+
+  //componentDidMount() {
+  //code executed right after the component is added to the DOM (user can see it)
+  //good place for performing async tasks (making ajax requests, event listeners)
+  //event listeners such as keydown, keyup for browser games
+  //}
 
 }
