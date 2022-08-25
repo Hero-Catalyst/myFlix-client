@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button } from 'react-bootstrap';
+
+import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
 
 export function RegistrationView(props) {
 
@@ -19,45 +20,68 @@ export function RegistrationView(props) {
   };
 
   return (
-    <Form>
-      <Form.Group>
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
-      </Form.Group>
+    <Container>
+      <Row>
+        <Col>
+          <CardGroup>
+            <Card>
+              <Card.Body>
+                <Card.Title>Please Register</Card.Title>
+                <Form>
+                  <Form.Group>
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={username}
+                      onChange={e => setUsername(e.target.value)}
+                      required
+                      minLength="5"
+                      placeholder="Enter a username here"
 
-      <Form.Group>
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-      </Form.Group>
+                    />
+                  </Form.Group>
 
-      <Form.Group>
-        <Form.Label>Email:</Form.Label>
-        <Form.Control
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-      </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control
+                      type="password"
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                      required
+                      minLength="8"
+                      placeholder="Your password must be 8 or more characters"
+                    />
+                  </Form.Group>
 
-      <Form.Group>
-        <Form.Label>Birthday:</Form.Label>
-        <Form.Control
-          type="date"
-          value={birthday}
-          onChange={e => setBirthday(e.target.value)}
-        />
-      </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control
+                      type="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      required
+                      placeholder="Enter your email address here"
+                    />
+                  </Form.Group>
 
-      <Button type="submit" onClick={handleSubmit}>Register</Button>
-    </Form>
+                  <Form.Group>
+                    <Form.Label>Birthday:</Form.Label>
+                    <Form.Control
+                      type="date"
+                      value={birthday}
+                      onChange={e => setBirthday(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Button type="submit" onClick={handleSubmit}>Register</Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </CardGroup>
+        </Col>
+      </Row>
+    </Container>
+
   );
 }
 
