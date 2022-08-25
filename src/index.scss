@@ -1,6 +1,17 @@
 //Dummy content
-$color: steelblue;
+$color: #4682b4;
+$color2: #5bc0de;
 
-.my-flix {
-  color: $color;
+
+body,
+html {
+  background: $color;
+}
+
+.app-container {
+  background-color: $color2;
+}
+
+.card-body {
+  background-color: $color2;
 }

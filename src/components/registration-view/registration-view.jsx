@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
+import { Form, Button, Card, CardGroup, Container, Col, Row, Nav, Navbar } from 'react-bootstrap';
+import { Navbar } from '../../index.jsx';
 
 export function RegistrationView(props) {
 
@@ -20,13 +21,14 @@ export function RegistrationView(props) {
   };
 
   return (
+
     <Container>
       <Row>
         <Col>
           <CardGroup>
             <Card>
               <Card.Body>
-                <Card.Title>Please Register</Card.Title>
+                <Card.Title>Welcome to the myFlix App! Please Register</Card.Title>
                 <Form>
                   <Form.Group>
                     <Form.Label>Username:</Form.Label>
