@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Form, Button, Card, CardGroup, Container, Col, Row, Nav, Navbar } from 'react-bootstrap';
-import { Navbar } from '../../index.jsx';
+import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
 
 export function RegistrationView(props) {
 
@@ -19,6 +18,7 @@ export function RegistrationView(props) {
     /* then call props.onRegistration(username) */
     props.onRegistration(username);
   };
+
 
   return (
 
@@ -86,6 +86,7 @@ export function RegistrationView(props) {
 
   );
 }
+
 
 RegistrationView.propTypes = {
   onRegistration: PropTypes.func.isRequired

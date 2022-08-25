@@ -9,7 +9,6 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 
-
 export class MainView extends React.Component {
 
   constructor() {
@@ -71,6 +70,7 @@ export class MainView extends React.Component {
     if (movies.length === 0) return <div className="main-view"></div>;
 
     return (
+
       <Row className="main-view justify-content-md-center">
         {/*If the state of 'selectedMovie' is not null, that selected movie
         will be returned. Otherwise, all *movies will be returned*/}
