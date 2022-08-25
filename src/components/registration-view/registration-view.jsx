@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import BasicNavbar from '../navigation/navbar';
 import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
+
 
 export function RegistrationView(props) {
 
@@ -23,6 +24,7 @@ export function RegistrationView(props) {
   return (
 
     <Container>
+      <BasicNavbar />
       <Row>
         <Col>
           <CardGroup>
