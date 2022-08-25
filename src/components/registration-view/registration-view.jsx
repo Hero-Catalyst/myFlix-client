@@ -46,6 +46,7 @@ RegistrationView.propTypes = {
     password: PropTypes.string.isRequired,
     email: PropTypes.email.isRequired,
     birthday: PropTypes.date.isRequired
-  }),
+  }).isRequired,
   onRegistration: PropTypes.func.isRequired
+
 };
