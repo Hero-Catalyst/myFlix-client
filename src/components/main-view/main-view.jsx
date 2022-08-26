@@ -24,6 +24,7 @@ export class MainView extends React.Component {
   }
 
   //get request for movies list from heroku
+  //I'm not positive I need this now...
   componentDidMount() {
     axios.get('https://myflix-movieapi-76028.herokuapp.com/movies')
       .then(response => {
@@ -31,6 +32,16 @@ export class MainView extends React.Component {
           movies: response.data
         });
       })
+  }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
   }
 
   /*When a movie is clicked, this function is invoked and updates the 
@@ -76,6 +87,15 @@ export class MainView extends React.Component {
       });
   }
 
+  //Logging out user
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null
+    });
+  }
+
 
   render() {
     const { movies, selectedMovie, user, register } = this.state;
@@ -112,6 +132,7 @@ export class MainView extends React.Component {
             </Col>
           ))
         }
+        <button onClick={() => { this.onLoggedOut() }}> Logout</button >
       </Row>
 
     );
