@@ -86,5 +86,5 @@ LoginView.propTypes = {
     username: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired
   }).isRequired,
-  onLoggedIn: PropTypes.func.isRequired
+
 };

@@ -114,6 +114,15 @@ export class MainView extends React.Component {
 
     return (
       <Router>
+        <div className="mainview">
+          <Route exact path="/" render={welcome} />
+          <Route exact path="/movies/:movieId" render={movie - view} />
+          <Route exact path="/genres/:name" render={genre - view} />
+          <Route exact path="/directors/:name" render={director - view} />
+        </div>
+      </Router>
+
+      /*<Router>
         <Row className="main-view justify-content-md-center">
           <Route exact path="/" render={() => {
             return movies.map(m => (
@@ -131,7 +140,7 @@ export class MainView extends React.Component {
 
           <Button onClick={() => { this.onLoggedOut() }}> Logout</Button >
         </Row>
-      </Router>
+      </Router>*/
     );
   }
 
