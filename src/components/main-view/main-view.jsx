@@ -2,7 +2,6 @@ import React from 'react';
 //use axios to fetch movie database
 import axios from 'axios';
 import { Row, Col } from 'react-bootstrap';
-import BasicNavbar from '../navigation/navbar';
 
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -71,8 +70,6 @@ export class MainView extends React.Component {
     if (movies.length === 0) return <div className="main-view"></div>;
 
     return (
-
-      <BasicNavbar />,
 
       <Row className="justify-content-md-center">
         {/*If the state of 'selectedMovie' is not null, that selected movie
