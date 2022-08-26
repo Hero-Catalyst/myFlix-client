@@ -1,2 +1,17 @@
+body,
+html {
+  background-color: #4682b4;
+}
 
+.app-container {
+  background-color: #4682b4;
+}
+
+.card-body {
+  background-color: #5bc0de;
+}
+
+.col {
+  background-color: #4682b4;
+}
 /*# sourceMappingURL=index.caa67093.css.map */
