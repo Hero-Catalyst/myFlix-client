@@ -1,7 +1,8 @@
 import React from 'react';
 //use axios to fetch movie database
 import axios from 'axios';
-import { Row, Col } from 'react-bootstrap';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Row, Col, Button } from 'react-bootstrap';
 
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -22,6 +23,22 @@ export class MainView extends React.Component {
       user: null
     };
   }
+
+  getMovies(token) {
+    axios.get('https://myflix-movieapi-76028.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        //Assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
 
   //get request for movies list from heroku
   //I'm not positive I need this now...
@@ -72,20 +89,6 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  getMovies(token) {
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        //Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
 
   //Logging out user
   onLoggedOut() {
@@ -110,31 +113,25 @@ export class MainView extends React.Component {
     //if (!register) return <RegistrationView onRegistration={(register) => this.onRegistration(register)} />
 
     return (
+      <Router>
+        <Row className="main-view justify-content-md-center">
+          <Route exact path="/" render={() => {
+            return movies.map(m => (
+              <Col md={3} key={m._id}>
+                <MovieCard movie={m} />
+              </Col>
+            ))
+          }} />
 
-      <Row className="justify-content-md-center">
-        {/*If the state of 'selectedMovie' is not null, that selected movie
-        will be returned. Otherwise, all *movies will be returned*/}
-        {selectedMovie
-          ? (
-            <Col md={8}>
-              <MovieView movie={selectedMovie} onBackClick={
-                newSelectedMovie => {
-                  this.setSelectedMovie(newSelectedMovie);
-                }} />
+          <Route path="/movies/:movieId" render={({ match }) => {
+            return <Col md={8}>
+              <MovieView movie={movies.find(m => m._id === match.params.movieId)} />
             </Col>
-          )
+          }} />
 
-          : movies.map(movie => (
-            <Col md={3}>
-              <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => {
-                this.setSelectedMovie(newSelectedMovie)
-              }} />
-            </Col>
-          ))
-        }
-        <button onClick={() => { this.onLoggedOut() }}> Logout</button >
-      </Row>
-
+          <Button onClick={() => { this.onLoggedOut() }}> Logout</Button >
+        </Row>
+      </Router>
     );
   }
 
