@@ -16,7 +16,7 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     //(e) prevents the default refresh/change of the page from the handleSubmit() method
     e.preventDefault();
-    axios.post('https://myflix-movieapi-76028.heroku.com/login', {
+    axios.post('https://myflix-movieapi-76028.herokuapp.com/login', {
       Username: username,
       Password: password
     })
