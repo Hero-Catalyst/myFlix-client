@@ -3,36 +3,55 @@ import {
   Nav,
   Navbar,
   NavDropdown,
-  Container
+  Container,
+  Button
 } from 'react-bootstrap';
+import NavbarOffcanvas from 'react-bootstrap/esm/NavbarOffcanvas';
 
-export default function BasicNavbar() {
+export function Menubar({ user }) {
+
+  const onLoggedOut = () => {
+    localStorage.clear();
+    window.open("/", "_self");
+  }
+  const isAuth = () => {
+    if (typeof window == "undefined") {
+      return false;
+    }
+    if (localStorage.getItem("token")) {
+      return localStorage.getItem("token");
+    } else {
+      return false;
+    }
+  };
+
+
   return (
-    <Navbar sticky="top" bg="light" expand="lg">
-      <Container fluid>
-        <Navbar.Brand href="#home">myFlix Movie App</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Register</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Movies</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Directors
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Genres</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Logout
-              </NavDropdown.Item>
-            </NavDropdown>
+
+    <Navbar className="main-nav" sticky="top" bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand className="navbar-logo" href="/">myFlixCinema</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ml-auto">
+            {isAuth() && (
+              <Button> variant="link" onClick={() => {
+                this.onLoggedOut()
+              }}Logout</Button>
+            )}
+            {!isAuth() && (
+              <Nav.Link href="/">Sign-in</Nav.Link>
+            )}
+            {!isAuth() && (
+              <Nav.Link href="/register">Sign-up</Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
+
 
 
 
