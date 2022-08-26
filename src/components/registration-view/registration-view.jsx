@@ -10,14 +10,62 @@ export function RegistrationView(props) {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
+  //creating validation
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [emailErr, setEmailErr] = useState('');
+
+  //validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr('Username Required');
+      isReq = false;
+    } else if (username.length < 5) {
+      setUsernameErr('Username must be 5 characters long');
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr('Password Required');
+      isReq = false;
+    } else if (password.length < 8) {
+      setPassword('Password must be 8 characters long');
+      isReq = false;
+    }
+    if (!email) {
+      setEmailErr('Email Required');
+      isReq = false;
+    } else if (email.indexOf('@') === -1) {
+      setEmail('Email is invalid');
+      isReq = false;
+    }
+
+    return isReq;
+  }
 
   const handleSubmit = (e) => {
     //(e) prevents the default refresh/change of the page from the handleSubmit() method
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    /* Send a request to the server for authentication */
-    /* then call props.onRegistration(username) */
-    props.onRegistration(username);
+    const isReq = validate();
+    if (isReq) {
+      //Send request to the server for authentication
+      axios.post('https://myflix-movieapi-76028.herokuapp.com/users', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+      })
+        .then(response => {
+          const data = response.data;
+          console.log(data);
+          alert('Registration successful, please login!');
+          window.open('/', '_self'); //the second argument '_self' is necessary so that the page will open in curent tab
+        })
+        .catch(response => {
+          console.log('response');
+          alert('unable to register');
+        });
+    }
   };
 
 
@@ -35,25 +83,27 @@ export function RegistrationView(props) {
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
                       type="text"
-                      value={username}
-                      onChange={e => setUsername(e.target.value)}
-                      required
-                      minLength="5"
                       placeholder="Enter a username here"
+                      value={username}
+                      onChange={e => setUsername(e.target.value)} />
 
-                    />
+                    {/* code added here to display validation error */}
+                    {values.usernameErr && <p>{values.usernameErr}</p>}
+
+
                   </Form.Group>
 
                   <Form.Group>
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
                       type="password"
-                      value={password}
-                      onChange={e => setPassword(e.target.value)}
-                      required
-                      minLength="8"
                       placeholder="Your password must be 8 or more characters"
-                    />
+                      value={password}
+                      onChange={e => setPassword(e.target.value)} />
+
+                    {/* code added here to display validation error */}
+                    {values.passwordErr && <p>{values.passwordErr}</p>}
+
                   </Form.Group>
 
                   <Form.Group>
@@ -61,10 +111,12 @@ export function RegistrationView(props) {
                     <Form.Control
                       type="email"
                       value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      required
                       placeholder="Enter your email address here"
-                    />
+                      onChange={e => setEmail(e.target.value)} />
+
+                    {/* code added here to display validation error */}
+                    {values.emailErr && <p>{values.emailErr}</p>}
+
                   </Form.Group>
 
                   <Form.Group>
@@ -90,6 +142,10 @@ export function RegistrationView(props) {
 
 
 RegistrationView.propTypes = {
-  onRegistration: PropTypes.func.isRequired
+  register: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired
+  }),
 
 };
