@@ -1,6 +1,7 @@
 //Hook
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { RegistrationView } from '../registration-view/registration-view';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -15,10 +16,17 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     //(e) prevents the default refresh/change of the page from the handleSubmit() method
     e.preventDefault();
-    console.log(username, password);
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);  //this allows a user to be logged in regardless of credentials.
+    axios.post('https://myflix-movieapi-76028.heroku.com/login', {
+      Username: username,
+      Password: password
+    })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user')
+      });
   };
 
   return (
