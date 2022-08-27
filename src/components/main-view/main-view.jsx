@@ -1,7 +1,7 @@
 import React from 'react';
 //use axios to fetch movie database
 import axios from 'axios';
-import { BrowserRouter as Router, Routes, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Row, Col, Button, Container } from 'react-bootstrap';
 
 import MenuBar from '../navigation/navbar';
