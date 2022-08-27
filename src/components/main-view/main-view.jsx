@@ -1,7 +1,7 @@
 import React from 'react';
 //use axios to fetch movie database
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Redirect } from 'react-router-dom';
 import { Row, Col, Button, Container } from 'react-bootstrap';
 
 import MenuBar from '../navigation/navbar';
@@ -104,8 +104,8 @@ export class MainView extends React.Component {
     const { movies, user } = this.state;
 
     return (
-      <MenuBar user={user} />,
-      <Routes>
+      <Router>
+        <MenuBar user={user} />
         <Row className="main-view justify-content-md-center">
 
           <Route exact path="/" render={() => {
@@ -142,7 +142,7 @@ export class MainView extends React.Component {
                 onBackClick={() => history.goBack()} />
             </Col>;
           }} />
-          {/* 
+
           <Route path="/directors/:name" render={({ match, history }) => {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
@@ -165,14 +165,14 @@ export class MainView extends React.Component {
             </Col>;
           }} />
 
-          <Route path='/users/:username' render={({history, match}) => {
-            if (!user) return 
+          <Route path='/users/:username' render={({ history, match }) => {
+            if (!user) return
             <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-            if (movies.length === 0) return <div className="main-view">
+            if (movies.length === 0) return <div className="main-view" />
             return
             <ProfileView history={history} movies={movies} user={user === match.params.username} />
           }} />
-       
+
 
           <Route path={`/user-update/${user}`} render={({ match, history }) => {
             if (!user) return <Redirect to="/" />
@@ -180,9 +180,9 @@ export class MainView extends React.Component {
               <UserUpdate user={user} onBackClick={() => history.goBack()} />
             </Col>
           }} />
-            */}
+
         </Row>
-      </Routes >
+      </Router>
     );
   }
 
