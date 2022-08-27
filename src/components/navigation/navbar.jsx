@@ -2,13 +2,12 @@ import React from 'react';
 import {
   Nav,
   Navbar,
-  NavDropdown,
   Container,
   Button
 } from 'react-bootstrap';
 import NavbarOffcanvas from 'react-bootstrap/esm/NavbarOffcanvas';
 
-export function Menubar({ user }) {
+export default function Menubar({ user }) {
 
   const onLoggedOut = () => {
     localStorage.clear();

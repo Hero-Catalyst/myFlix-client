@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
 
@@ -62,7 +63,7 @@ export function RegistrationView(props) {
           window.open('/', '_self'); //the second argument '_self' is necessary so that the page will open in curent tab
         })
         .catch(response => {
-          console.log('response');
+          console.log('error registering the user');
           alert('unable to register');
         });
     }
