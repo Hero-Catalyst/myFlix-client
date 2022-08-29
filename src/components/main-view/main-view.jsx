@@ -29,6 +29,8 @@ export class MainView extends React.Component {
     //Code executed right when the component is created in memory - happens before "render"
     this.state = {
       movies: [],
+      directors: [],
+      genres: [],
       user: null
     };
   }
@@ -75,6 +77,36 @@ export class MainView extends React.Component {
         //Assign the result to the state
         this.setState({
           movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  getDirectos(token) {
+    axios.get('https://myflix-movieapi-76028.herokuapp.com/directors', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        //Assign the result to the state
+        this.setState({
+          directors: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  getGenres(token) {
+    axios.get('https://myflix-movieapi-76028.herokuapp.com/genres', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        //Assign the result to the state
+        this.setState({
+          genres: response.data
         });
       })
       .catch(function (error) {
