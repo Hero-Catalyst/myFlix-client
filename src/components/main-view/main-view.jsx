@@ -123,7 +123,7 @@ export class MainView extends React.Component {
             //user details are *passed as a prop to the LoginView
             if (!user) return (
               <Col>
-                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
               </Col>
             );
             // Before the movies have been loaded
