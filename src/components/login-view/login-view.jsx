@@ -32,8 +32,7 @@ export function LoginView(props) {
       setPassword('Password must be 8 characters long');
       isReq = false;
     }
-
-    return isReq;
+    return isReq
   }
 
   const handleSubmit = (e) => {

@@ -30,7 +30,7 @@ export class MovieView extends React.Component {
         <Row>
           <Col>
             <div className="movie-poster">
-              <img crossorigin="anonymous" src={movie.ImagePath} />
+              <img crossOrigin="anonymous" src={movie.ImagePath} />
             </div>
           </Col>
         </Row>
@@ -53,7 +53,7 @@ export class MovieView extends React.Component {
           </Col>
         </Row>
 
-        <Row>
+        {/* <Row>
           <Col>
             <div className="movie-genre">
               <span className="label">Genre:</span>
@@ -75,7 +75,7 @@ export class MovieView extends React.Component {
               <Button variant="link">Director</Button>
             </Link>
           </Col>
-        </Row>
+    </Row> */}
 
         <Row>
           <Col md={8}>
@@ -97,6 +97,5 @@ MovieView.propTypes = {
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired
-  }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  }).isRequired
 }
