@@ -29,22 +29,9 @@ export class MainView extends React.Component {
     //Code executed right when the component is created in memory - happens before "render"
     this.state = {
       movies: [],
-      directors: [],
-      genres: [],
       user: null
     };
   }
-
-  //get request for movies list from heroku
-  //I'm not positive I need this now...
-  /*componentDidMount() {
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/movies')
-      .then(response => {
-        this.setState({
-          movies: response.data
-        });
-      })
-  }*/
 
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
@@ -83,51 +70,6 @@ export class MainView extends React.Component {
         console.log(error);
       });
   }
-
-  getDirectos(token) {
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/directors', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        //Assign the result to the state
-        this.setState({
-          directors: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  getGenres(token) {
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/genres', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        //Assign the result to the state
-        this.setState({
-          genres: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  /*When a movie is clicked, this function is invoked and updates the 
-  state of the `selectedMovie` *property to that movie
-  setSelectedMovie(newSelectedMovie) {
-    this.setState({
-      selectedMovie: newSelectedMovie
-    });
-  }*/
-
-  //When a user registers
-  /*onRegistration(register) {
-    this.setState({
-      register
-    });
-  }*/
 
 
   //Logging out user
