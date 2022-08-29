@@ -99,13 +99,13 @@ export class MainView extends React.Component {
 
 
   //Logging out user
-  onLoggedOut() {
+  /*onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.setState({
       user: null
     });
-  }
+  }*/
 
 
   render() {
