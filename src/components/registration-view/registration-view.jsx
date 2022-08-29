@@ -12,12 +12,11 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
   //creating validation
-  const [calues, setValues] = useState({
+  const [values, setValues] = useState({
     usernameErr: '',
     passwordErr: '',
-    emailErr: '',
-    birthdayErr: ''
-  })
+    emailErr: ''
+  });
 
   //validate user inputs
   const validate = () => {
