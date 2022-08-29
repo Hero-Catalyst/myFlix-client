@@ -32,8 +32,6 @@ export function LoginView(props) {
       setPassword('Password must be 8 characters long');
       isReq = false;
     }
-
-    return isReq;
   }
 
   const handleSubmit = (e) => {
@@ -67,6 +65,7 @@ export function LoginView(props) {
         {usernameErr && <p>{usernameErr}</p>}
       </Form.Group>
 
+
       <Form.Group controlId="formPassword">
         <Form.Label>Password:</Form.Label>
         <Form.Control type="password" placeholder="Password" value={password}
@@ -78,7 +77,9 @@ export function LoginView(props) {
         Submit
       </Button>
     </Form>
+
   );
+
 }
 
 LoginView.propTypes = {

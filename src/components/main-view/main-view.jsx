@@ -6,10 +6,18 @@ import { Row, Col, Button, Container } from 'react-bootstrap';
 
 import MenuBar from '../navigation/navbar';
 
+//importing view components
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+//needs code 
+import { DirectorView } from '../director-view/director-view';
+//needs code 
+import { GenreView } from '../genre-view/genre-view';
+//needs code 
+import { ProfileView } from '../profile-view/profile-view';
 import { RegistrationView } from '../registration-view/registration-view';
+
 
 
 export class MainView extends React.Component {
@@ -105,7 +113,7 @@ export class MainView extends React.Component {
 
     return (
       <Router>
-        <MenuBar user={user} />
+
         <Row className="main-view justify-content-md-center">
 
           <Route exact path="/" render={() => {
@@ -136,6 +144,7 @@ export class MainView extends React.Component {
               </Col>
             );
           }} />
+
 
           <Route path="/movies/:movieId" render={({ match, history }) => {
             if (!user) return (
