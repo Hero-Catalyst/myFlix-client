@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, ButtonGroup, Col, Row, Container } from 'react-bootstrap';
 import Link from 'react-router-dom';
+import { GenreView } from '../genre-view/genre-view';
 
 import movieviewscss from './movie-view.scss';
 
@@ -38,7 +39,7 @@ export class MovieView extends React.Component {
         <Row>
           <Col>
             <div className="movie-title">
-              <span className="label">Title:</span>
+              <span className="label">Title: </span>
               <span className="value">{movie.Title}</span>
             </div>
           </Col>
@@ -47,35 +48,33 @@ export class MovieView extends React.Component {
         <Row>
           <Col>
             <div className="movie-description">
-              <span className="label">Description:</span>
+              <span className="label">Description: </span>
               <span className="value">{movie.Description}</span>
             </div>
           </Col>
         </Row>
 
-        {/* <Row>
+        <Row>
           <Col>
             <div className="movie-genre">
-              <span className="label">Genre:</span>
+              <span className="label">Genre: </span>
+
               <span className="value">{movie.Genre}</span>
+
             </div>
-            <Link to={`/genres/${movie.Genre.Name}`}>
-              <Button variant="link">Genre</Button>
-            </Link>
+
           </Col>
         </Row>
 
         <Row>
           <Col>
             <div className="movie-director">
-              <span className="label">Director:</span>
-              <span className="value">{movie.Director}</span>
+              <span className="label">Director: </span>
+              <Button className="value" onClick={() => { }}>{movie.Director}</Button>
             </div>
-            <Link to={`/directors/${movie.Director.Name}`}>
-              <Button variant="link">Director</Button>
-            </Link>
+
           </Col>
-    </Row> */}
+        </Row>
 
         <Row>
           <Col md={8}>
@@ -96,6 +95,8 @@ MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.string.isRequired,
+    Director: PropTypes.string.isRequired,
   }).isRequired
 }

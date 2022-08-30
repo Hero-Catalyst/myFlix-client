@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 
 
@@ -40,19 +41,33 @@ export class GenreView extends React.Component {
 
 
   render() {
-    const { movie, onBackClick } = this.props;
+    const { genres, onBackClick } = this.props;
 
     return (
-      <Card clssName="genre-view">
-        <Card.Body>
-          <Card.Header>Genre</Card.Header>
-          <Card.Title>{genre.Name}</Card.Title>
-          <Card.Text>Description: {genre.Description}</Card.Text>
+      <Router>
+        <Row className="genre-view justify-content-md-center">
+          <Route exact path="/genres" render={() => {
+            return (
+              genres.map(m => (
+                <Col md={3} key={g._id}>
+                  <GenreCard genre={g} />
+                </Col>
+              ))
+            );
+          }} />
 
-          <Button onClick={() => onBackClick()}>Back</Button>
+          <Card className="genre-card">
+            <Card.Body>
+              <Card.Header>Genre</Card.Header>
+              <Card.Title>{genre.Name}</Card.Title>
+              <Card.Text>Description: {genre.Description}</Card.Text>
 
-        </Card.Body>
-      </Card>
+              <Button onClick={() => onBackClick()}>Back</Button>
+
+            </Card.Body>
+          </Card>
+        </Row>
+      </Router>
     );
   }
 }
