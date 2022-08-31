@@ -4,7 +4,7 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Row, Col, Button, Container } from 'react-bootstrap';
 
-import MenuBar from '../navigation/navbar';
+import { Menubar } from '../navigation/navbar';
 
 //importing view components
 import { LoginView } from '../login-view/login-view';
@@ -85,19 +85,12 @@ export class MainView extends React.Component {
   render() {
     const { movies, user } = this.state;
 
-    if (!user) return (
-      <Row>
-        <Col>
-          <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-        </Col>
-      </Row>
-    );
 
     if (movies.length === 0) return <div className="main-view" />;
 
     return (
       <Router>
-
+        <Menubar />
         <Row className="main-view justify-content-md-center">
 
           <Route exact path="/" render={() => {
