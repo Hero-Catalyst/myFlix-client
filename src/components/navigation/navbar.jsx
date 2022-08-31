@@ -9,7 +9,7 @@ import NavbarOffcanvas from 'react-bootstrap/esm/NavbarOffcanvas';
 
 export function Menubar({ user }) {
 
-  const onLoggedOut = () => {
+  onLoggedOut = () => {
     localStorage.clear();
     window.open("/", "_self");
   }

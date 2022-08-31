@@ -73,13 +73,13 @@ export class MainView extends React.Component {
 
 
   //Logging out user
-  onLoggedOut() {
+  /*onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.setState({
       user: null
     });
-  }
+  }*/
 
 
   render() {
@@ -90,7 +90,7 @@ export class MainView extends React.Component {
 
     return (
       <Router>
-        <Menubar />
+        <Menubar user={user} />
         <Row className="main-view justify-content-md-center">
 
           <Route exact path="/" render={() => {
