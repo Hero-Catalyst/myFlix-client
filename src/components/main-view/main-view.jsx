@@ -72,16 +72,6 @@ export class MainView extends React.Component {
   }
 
 
-  //Logging out user
-  /*onLoggedOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.setState({
-      user: null
-    });
-  }*/
-
-
   render() {
     const { movies, user } = this.state;
 
@@ -168,11 +158,11 @@ export class MainView extends React.Component {
             );
           }} />
 
-          <Route path='/users/:username' render={({ history, match }) => {
-            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-            if (movies.length === 0) return <div className="main-view" />
-            return <ProfileView history={history} movies={movies} user={user === match.params.username} />
-
+          <Route path={`/users/${user}`} render={({ history }) => {
+            if (!user) return <Redirect to="/" />
+            return <Col>
+              <ProfileView user={user} onBackClick={() => history.goBack()} />
+            </Col>
           }} />
 
 
