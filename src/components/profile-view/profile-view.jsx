@@ -15,53 +15,15 @@ export function ProfileView(props) {
   });
 
   const favoriteMovieList = () => {
-    //function(method)-need to display user favorite movies list 
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/users/:Username/movies', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        this.setState({
-          FavoriteMovies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+
   }
 
   const getUser = () => {
-    //Getting user from database?  Axios?
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/users/:Username', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        this.setState({
-          user: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+
   }
 
   const handleSubmit = (e) => {
-    //(e) prevents the default refresh/change of the page from the handleSubmit() method
-    e.preventDefault();
-    const isReq = validate();
-    if (isReq) {
-      //Send request to the server for authentication
-      axios.post('https://myflix-movieapi-76028.herokuapp.com/login', {
-        Username: username,
-        Password: password
-      })
-        .then(response => {
-          const data = response.data;
-          props.onLoggedIn(data);
-        })
-        .catch(e => {
-          console.log('no such user')
-        });
-    }
+
   }
 
   const removeFav = (id) => {
@@ -70,7 +32,7 @@ export function ProfileView(props) {
 
   const handleUpdate = (e) => {
     //function for rendering changes
-    this.setUser
+
   };
 
 
