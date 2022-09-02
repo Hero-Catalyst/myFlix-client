@@ -9,8 +9,14 @@ import FavoriteMovies from './favorite-movies';
 import UpdateUser from './update-user';
 
 
-export function ProfileView({ movies, onUpdatedUserInfo }) {
-  const [user, setUser] = useState('');
+export function ProfileView() {
+  const [user, setUser] = useState({
+    Username: '',
+    Password: '',
+    Email: '',
+    Birthday: '',
+    FavoriteMovies: []
+  });
 
   const favoriteMovieList = () => {
     //function(method)-need to display user favorite movies list 
@@ -27,7 +33,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
       });
   }
 
-  const getUser = () => {
+  /*const getUser = () => {
     //Getting user from database?  Axios?
     axios.get('https://myflix-movieapi-76028.herokuapp.com/users/:Username', {
       headers: { Authorization: `Bearer ${token}` }
@@ -40,7 +46,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  }*/
 
   const handleSubmit = (e) => {
     //write code for submitting changes
