@@ -3,18 +3,14 @@ import { Container, Col, Row, Card, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './profile-view.scss';
-//Import Component files
-import UserInfo from './user-info';
-import FavoriteMovies from './favorite-movies';
-import UpdateUser from './update-user';
 
 
-export function ProfileView() {
+export function ProfileView(props) {
   const [user, setUser] = useState({
-    Username: '',
-    Password: '',
-    Email: '',
-    Birthday: '',
+    Username: props.username,
+    Password: props.password,
+    Email: props.email,
+    Birthday: props.birthday,
     FavoriteMovies: []
   });
 
@@ -33,7 +29,7 @@ export function ProfileView() {
       });
   }
 
-  /*const getUser = () => {
+  const getUser = () => {
     //Getting user from database?  Axios?
     axios.get('https://myflix-movieapi-76028.herokuapp.com/users/:Username', {
       headers: { Authorization: `Bearer ${token}` }
@@ -46,11 +42,26 @@ export function ProfileView() {
       .catch(function (error) {
         console.log(error);
       });
-  }*/
+  }
 
   const handleSubmit = (e) => {
-    //write code for submitting changes
-    //needs to update state and database
+    //(e) prevents the default refresh/change of the page from the handleSubmit() method
+    e.preventDefault();
+    const isReq = validate();
+    if (isReq) {
+      //Send request to the server for authentication
+      axios.post('https://myflix-movieapi-76028.herokuapp.com/login', {
+        Username: username,
+        Password: password
+      })
+        .then(response => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch(e => {
+          console.log('no such user')
+        });
+    }
   }
 
   const removeFav = (id) => {
@@ -67,9 +78,6 @@ export function ProfileView() {
   return (
     <Container>
       <Row>
-        <UserInfo name={user.Username} email={user.Email} />
-        <FavoriteMovies favoriteMovieList={favoriteMovieList} />
-        <UpdateUser handleSubmit={handleSubmit} handleUpdate={handleUpdate} />
 
       </Row>
 
