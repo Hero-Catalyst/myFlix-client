@@ -74,7 +74,6 @@ export function ProfileView() {
             <input
               type="text"
               name="username"
-              value={user.Username}
               onChange={handleUpdate}
             />
             <Col>
@@ -90,7 +89,6 @@ export function ProfileView() {
               <input
                 type="email"
                 name="email"
-                value={user.Email}
                 onChange={handleUpdate}
               />
             </Col>
@@ -99,7 +97,6 @@ export function ProfileView() {
               <input
                 type="date"
                 name="birthday"
-                value={user.Birthday}
                 onChange={handleUpdate}
               />
             </Col>
