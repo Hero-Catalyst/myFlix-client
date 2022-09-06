@@ -16,6 +16,7 @@ export function ProfileView() {
     })
       .then(response => {
         //Assign the result to the state
+
         this.setState({
           Username: response.data.Username,
           Password: response.data.Password,
@@ -27,6 +28,7 @@ export function ProfileView() {
       .catch(function (error) {
         console.log(error);
       });
+
   }
 
   const favoriteMovieList = () => {
