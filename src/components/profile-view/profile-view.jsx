@@ -3,23 +3,29 @@ import { Container, Col, Row, Card, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './profile-view.scss';
+import { object } from 'prop-types';
 
-//import UserInfo from './user-info';
+import UserInfo from './user-info';
 //import FavoriteMovies from './favorite-movies';
 //import UpdateUser from './update-user';
 
 
 export function ProfileView() {
   //HOOK useState
-  const [user, setUser] = useState('');
-
+  const [user, setUser] = useState({
+    Username: " ",
+    Password: " ",
+    Email: " ",
+    Birthday: " ",
+    FavoriteMovies: [" "]
+  });
 
 
   const currentUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
 
   //METHODS
-  const getUser = (token, user) => {
+  const getUser = (token, setUser) => {
     axios.get('https://myflix-movieapi-76028.herokuapp.com/users/${user}', {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -34,6 +40,8 @@ export function ProfileView() {
 
   };
 
+
+
   //Calling the hook function on render. Empty array as 2nd argument so the call will only run once on each render
   useEffect(() => {
     getUser(token, currentUser);
@@ -45,7 +53,7 @@ export function ProfileView() {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => {
-        setUser(response.data);
+        setUser.FavoriteMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -58,9 +66,9 @@ export function ProfileView() {
   }
 
   const handleUpdate = (e) => {
-    const name = e.target.user;
+    const name = e.target.name;
     const value = e.target.value;
-    setUser(values => ({ ...values, [user]: value }))
+    setUser(values => ({ ...values, [name]: value }))
   }
 
   const removeFav = (id) => {
@@ -82,7 +90,7 @@ export function ProfileView() {
             <input
               type="text"
               name="username"
-              value={user}
+
               onChange={handleUpdate}
             />
             <Col>
