@@ -4,10 +4,16 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './profile-view.scss';
 
+//import UserInfo from './user-info';
+//import FavoriteMovies from './favorite-movies';
+//import UpdateUser from './update-user';
+
 
 export function ProfileView() {
   //HOOK useState
   const [user, setUser] = useState('');
+
+
 
   const currentUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
@@ -28,32 +34,33 @@ export function ProfileView() {
 
   };
 
+  //Calling the hook function on render. Empty array as 2nd argument so the call will only run once on each render
   useEffect(() => {
     getUser(token, currentUser);
   }, []);
 
+  //This needs to be updated and called
   const favoriteMovieList = () => {
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/users/:Username/movies', {
+    axios.get('https://myflix-movieapi-76028.herokuapp.com/users/${user}/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
-      .then(response => {
-        //Assign the result to the state
-        this.setState({
-          FavoriteMovies: response.data.FavoriteMovies
-        });
+      .then((response) => {
+        setUser(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    alert('Your info has changed');
   }
 
   const handleUpdate = (e) => {
-    const name = e.user.Username;
-    setUser
+    const name = e.target.user;
+    const value = e.target.value;
+    setUser(values => ({ ...values, [user]: value }))
   }
 
   const removeFav = (id) => {
@@ -66,6 +73,7 @@ export function ProfileView() {
     <Container>
 
       <Row>
+
         <Col>
           <form onSubmit={handleSubmit}>
             <h1>Need to make some changes?</h1>
@@ -74,6 +82,7 @@ export function ProfileView() {
             <input
               type="text"
               name="username"
+              value={user}
               onChange={handleUpdate}
             />
             <Col>
