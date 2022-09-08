@@ -7,26 +7,19 @@ import { object } from 'prop-types';
 
 import UserInfo from './user-info';
 //import FavoriteMovies from './favorite-movies';
-//import UpdateUser from './update-user';
+import UpdateUser from './update-user';
 
 
 export function ProfileView() {
   //HOOK useState
-  const [user, setUser] = useState({
-    Username: " ",
-    Password: " ",
-    Email: " ",
-    Birthday: " ",
-    FavoriteMovies: [" "]
-  });
-
+  const [user, setUser] = useState('');
 
   const currentUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
 
   //METHODS
-  const getUser = (token, setUser) => {
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/users/${user}', {
+  const getUser = (token, user) => {
+    axios.get(`https://myflix-movieapi-76028.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
@@ -37,10 +30,7 @@ export function ProfileView() {
       .catch(function (error) {
         console.log(error);
       });
-
   };
-
-
 
   //Calling the hook function on render. Empty array as 2nd argument so the call will only run once on each render
   useEffect(() => {
@@ -49,7 +39,7 @@ export function ProfileView() {
 
   //This needs to be updated and called
   const favoriteMovieList = () => {
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/users/${user}/movies', {
+    axios.get(`https://myflix-movieapi-76028.herokuapp.com/users/${user}/movies`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => {
@@ -60,16 +50,11 @@ export function ProfileView() {
       });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Your info has changed');
-  }
-
-  const handleUpdate = (e) => {
+  /*const handleUpdate = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setUser(values => ({ ...values, [name]: value }))
-  }
+  }*/
 
   const removeFav = (id) => {
     //function for remove favorite movie button
@@ -79,48 +64,26 @@ export function ProfileView() {
 
   return (
     <Container>
-
       <Row>
-
         <Col>
-          <form onSubmit={handleSubmit}>
-            <h1>Need to make some changes?</h1>
-
-            <label>Change Username: </label>
-            <input
-              type="text"
-              name="username"
-
-              onChange={handleUpdate}
-            />
-            <Col>
-              <label>Change Password: </label>
-              <input
-                type="password"
-                name="password"
-                onChange={handleUpdate}
-              />
-            </Col>
-            <Col>
-              <label>Change Email: </label>
-              <input
-                type="email"
-                name="email"
-                onChange={handleUpdate}
-              />
-            </Col>
-            <Col>
-              <label>Change Birthday: </label>
-              <input
-                type="date"
-                name="birthday"
-                onChange={handleUpdate}
-              />
-            </Col>
-            <Button className="primary" type="submit">Submit</Button>
-          </form>
+          <h1 className='text-white text-center py-5'>Hello {currentUser}!</h1>
         </Col>
       </Row>
-    </Container >
+      <Row>
+        <Col>
+          <h4 className='text-white text-center py-5'>
+            Update your information:{' '}
+          </h4>
+          <UpdateUser user={user} />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h4 className='text-white text-center py-5'>
+            TODO Add Favorite Movies
+          </h4>
+        </Col>
+      </Row>
+    </Container>
   );
 }
