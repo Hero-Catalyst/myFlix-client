@@ -7,7 +7,7 @@ import { object } from 'prop-types';
 
 import UserInfo from './user-info';
 //import FavoriteMovies from './favorite-movies';
-import UpdateUser from './update-user';
+import { UpdateUser } from './update-user';
 
 
 export function ProfileView() {

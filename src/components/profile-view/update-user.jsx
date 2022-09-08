@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
@@ -75,7 +75,7 @@ export function UpdateUser(props) {
           window.open(`/users/${username}`, '_self');
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
           alert('Unable to update profile.')
         });
     }
