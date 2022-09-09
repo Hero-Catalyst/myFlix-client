@@ -4,13 +4,14 @@ import axios from 'axios';
 import './profile-view.scss';
 import { object } from 'prop-types';
 
-//import FavoriteMovies from './favorite-movies';
+import FavoriteMovies from './favorite-movies';
 import { UpdateUser } from './update-user';
 
 
 export function ProfileView() {
   //HOOK useState
   const [user, setUser] = useState('');
+  const { favoriteMovies, setFavoriteMovies } = useState([]);
 
   const currentUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
@@ -35,13 +36,12 @@ export function ProfileView() {
     getUser(token, currentUser);
   }, []);
 
-  //This needs to be updated and called
   const favoriteMovieList = () => {
     axios.get(`https://myflix-movieapi-76028.herokuapp.com/users/${user}/movies`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => {
-        setUser.FavoriteMovies(response.data);
+        setFavoriteMovies(response.data.FavoriteMovies);
       })
       .catch(function (error) {
         console.log(error);
@@ -65,13 +65,14 @@ export function ProfileView() {
     <Container>
       <Row>
         <Col>
-          <h1 className='text-white text-center py-5'>Hello {currentUser}!</h1>
+          <h1 className='text-white text-center'>Hello {currentUser}!</h1>
+          <h3 className='text-white text-center'> {user.Email}</h3>
         </Col>
       </Row>
       <Row>
         <Col>
           <h4 className='text-white text-center py-5'>
-            Update your information:{' '}
+            Feel free to update your information:{' '}
           </h4>
           <UpdateUser user={user} />
         </Col>
@@ -83,6 +84,8 @@ export function ProfileView() {
           </h4>
         </Col>
       </Row>
+      <FavoriteMovies favoriteMovies={favoriteMovies} />
+
     </Container>
   );
 }

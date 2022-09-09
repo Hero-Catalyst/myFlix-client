@@ -26,7 +26,7 @@ export function UpdateUser(props) {
         ...values,
         usernameErr: 'Username must be at tleast 2 characters long',
       });
-      isReq = flase;
+      isReq = false;
     }
     if (!password) {
       setValues({ ...values, passwordErr: 'Password required' });
@@ -81,17 +81,6 @@ export function UpdateUser(props) {
     }
   };
 
-  /*need movie map
-  const fruits = new Map([
-  ["apples", 500],
-  ["bananas", 300],
-  ["oranges", 200]
-]);
-  fruits.set("apples", 500);
-fruits.set("bananas", 300);
-fruits.set("oranges", 200);
-fruits.delete();
-  */
 
 
 
