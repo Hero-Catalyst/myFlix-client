@@ -18,7 +18,7 @@ export function UpdateUser(props) {
 
   const validate = () => {
     let isReq = true;
-    if (!useranme) {
+    if (!username) {
       setValues({ ...values, usernameErr: 'Username required' });
       isReq = false;
     } else if (username.length < 2) {
@@ -81,9 +81,22 @@ export function UpdateUser(props) {
     }
   };
 
+  /*need movie map
+  const fruits = new Map([
+  ["apples", 500],
+  ["bananas", 300],
+  ["oranges", 200]
+]);
+  fruits.set("apples", 500);
+fruits.set("bananas", 300);
+fruits.set("oranges", 200);
+fruits.delete();
+  */
+
+
 
   return (
-    <Container id='update-form' classname='mt-5'>
+    <Container id='update-form' className='mt-5'>
       <Row>
         <h3 className='mx-auto text-center'>Edit Profile</h3>
       </Row>

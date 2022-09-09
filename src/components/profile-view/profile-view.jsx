@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Col, Row, Card, Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './profile-view.scss';
 import { object } from 'prop-types';
 
-import UserInfo from './user-info';
 //import FavoriteMovies from './favorite-movies';
 import { UpdateUser } from './update-user';
 
@@ -48,13 +46,14 @@ export function ProfileView() {
       .catch(function (error) {
         console.log(error);
       });
+
   };
 
-  /*const handleUpdate = (e) => {
+  const handleUpdate = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setUser(values => ({ ...values, [name]: value }))
-  }*/
+  }
 
   const removeFav = (id) => {
     //function for remove favorite movie button
@@ -80,7 +79,7 @@ export function ProfileView() {
       <Row>
         <Col>
           <h4 className='text-white text-center py-5'>
-            TODO Add Favorite Movies
+            Your Favorite Movies:
           </h4>
         </Col>
       </Row>
