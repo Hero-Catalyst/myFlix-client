@@ -80,7 +80,7 @@ export class MovieView extends React.Component {
             <ButtonGroup size="lg">
               <Button onClick={() => { onBackClick(null); }}>Back</Button>
               <Button variant="info" onClick={() => { }}>Add to Favorites</Button>
-              <Button variant="danger" onClick={() => { }}>Remove from Favorites</Button>
+
             </ButtonGroup>
           </Col>
         </Row>

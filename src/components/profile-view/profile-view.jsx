@@ -4,17 +4,16 @@ import axios from 'axios';
 import './profile-view.scss';
 import { object } from 'prop-types';
 
-import FavoriteMovies from './favorite-movies';
+//import FavoriteMovies from './favorite-movies';
 import { UpdateUser } from './update-user';
 
 
 export function ProfileView() {
   //HOOK useState
   const [user, setUser] = useState('');
-  const { favoriteMovies, setFavoriteMovies } = useState([]);
-
   const currentUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
+
 
   //METHODS
   const getUser = (token, user) => {
@@ -35,19 +34,6 @@ export function ProfileView() {
   useEffect(() => {
     getUser(token, currentUser);
   }, []);
-
-  const favoriteMovieList = () => {
-    axios.get(`https://myflix-movieapi-76028.herokuapp.com/users/${user}/movies`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then((response) => {
-        setFavoriteMovies(response.data.FavoriteMovies);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-  };
 
   const handleUpdate = (e) => {
     const name = e.target.name;
@@ -82,9 +68,12 @@ export function ProfileView() {
           <h4 className='text-white text-center py-5'>
             Your Favorite Movies:
           </h4>
+
         </Col>
       </Row>
-      <FavoriteMovies favoriteMovies={favoriteMovies} />
+
+
+
 
     </Container>
   );
