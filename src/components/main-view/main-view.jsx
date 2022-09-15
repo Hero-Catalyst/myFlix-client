@@ -14,7 +14,6 @@ import { MovieView } from "../movie-view/movie-view";
 import { DirectorView } from "../director-view/director-view";
 //needs code 
 import { GenreView } from "../genre-view/genre-view";
-//needs code 
 import { ProfileView } from "../profile-view/profile-view";
 import { RegistrationView } from "../registration-view/registration-view";
 
