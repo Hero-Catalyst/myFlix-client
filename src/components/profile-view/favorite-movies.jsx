@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Button, Card, Col } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
 
 export function FavoriteMovies() {
 
-  const { favoriteMovies, setFavoriteMovies } = useState([]);
+  const { favoriteMovies, setFavoriteMovies } = useState("");
+
 
   const favoriteMovieList = (token, user) => {
-    axios.get(`https://myflix-movieapi-76028.herokuapp.com/users/${user}/movies`, {
+    axios.get(`https://myflix-movieapi-76028.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => {
-        setFavoriteMovies([response.data.FavoriteMovies]);
+        setFavoriteMovies(response.data.FavoriteMovies);
       })
       .catch(function (error) {
         console.log(error);
@@ -23,43 +24,28 @@ export function FavoriteMovies() {
 
 
 
-
-
-
-
-  /*need movie map
-const fruits = new Map([
-["apples", 500],
-["bananas", 300],
-["oranges", 200]
-]);
-fruits.set("apples", 500);
-fruits.set("bananas", 300);
-fruits.set("oranges", 200);
-fruits.delete();
-*/
-
-
   return (
-    <Row>
-      <Col>
-        {favoriteMovies.map((movies) => {
-          return (
-            <Card key={movies._id}>
+    <Container>
+      <Row>
+        <Col>
+          {favoriteMovieList.map((movie) => {
+            return (
+              <Card key={movie._id}>
 
-              <Card.Img variant-="top" src={movies.ImagePath} />
-              <Card.Body>
-                <Card.Title>{movies.Title}</Card.Title>
-                <Card.Text>{movies.Description}</Card.Text>
-                <Link to={`/movies/${movies._id}`}>
-                  <Button variant="link">Open</Button>
-                </Link>
-              </Card.Body>
-            </Card>
-          )
-        })
-        }
-      </Col>
-    </Row>
+                <Card.Img variant-="top" src={movie.ImagePath} />
+                <Card.Body>
+                  <Card.Title>{movie.Title}</Card.Title>
+                  <Card.Text>{movie.Description}</Card.Text>
+                  <Link to={`/movies/${movie._id}`}>
+                    <Button variant="link">Open</Button>
+                  </Link>
+                </Card.Body>
+              </Card>
+            )
+          })
+          }
+        </Col>
+      </Row>
+    </Container>
   )
 }

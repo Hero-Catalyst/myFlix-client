@@ -4,17 +4,17 @@ import axios from "axios";
 import "./profile-view.scss";
 import { object } from "prop-types";
 
-
+//Importing Components
 import { UpdateUser } from "./update-user";
 import { FavoriteMovies } from "./favorite-movies";
 
-
+//Component Start
 export function ProfileView() {
   //HOOK useState
   const [user, setUser] = useState("");
+
   const currentUser = localStorage.getItem("user");
   const token = localStorage.getItem("token");
-
 
   //METHODS
   const getUser = (token, user) => {
@@ -23,7 +23,6 @@ export function ProfileView() {
     })
       .then((response) => {
         //Assign the result to the state
-        console.log(response.data);
         setUser(response.data);
       })
       .catch(function (error) {
@@ -69,7 +68,8 @@ export function ProfileView() {
           <h4 className="text-white text-center py-5">
             Your Favorite Movies:
           </h4>
-          <FavoriteMovies />
+          <FavoriteMovies
+          />
         </Col>
       </Row>
 
