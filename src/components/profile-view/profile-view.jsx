@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Col, Row, Card, Button, Form } from 'react-bootstrap';
-import axios from 'axios';
-import './profile-view.scss';
-import { object } from 'prop-types';
+import React, { useState, useEffect } from "react";
+import { Container, Col, Row, Card, Button, Form } from "react-bootstrap";
+import axios from "axios";
+import "./profile-view.scss";
+import { object } from "prop-types";
 
-//import FavoriteMovies from './favorite-movies';
-import { UpdateUser } from './update-user';
+
+import { UpdateUser } from "./update-user";
+import { FavoriteMovies } from "./favorite-movies";
 
 
 export function ProfileView() {
   //HOOK useState
-  const [user, setUser] = useState('');
-  const currentUser = localStorage.getItem('user');
-  const token = localStorage.getItem('token');
+  const [user, setUser] = useState("");
+  const currentUser = localStorage.getItem("user");
+  const token = localStorage.getItem("token");
 
 
   //METHODS
@@ -51,24 +52,24 @@ export function ProfileView() {
     <Container>
       <Row>
         <Col>
-          <h1 className='text-white text-center'>Hello {currentUser}!</h1>
-          <h3 className='text-white text-center'> {user.Email}</h3>
+          <h1 className="text-white text-center">Hello {currentUser}!</h1>
+          <h3 className="text-white text-center"> {user.Email}</h3>
         </Col>
       </Row>
       <Row>
         <Col>
-          <h4 className='text-white text-center py-5'>
-            Feel free to update your information:{' '}
+          <h4 className="text-white text-center py-5">
+            Feel free to update your information:{" "}
           </h4>
           <UpdateUser user={user} />
         </Col>
       </Row>
       <Row>
         <Col>
-          <h4 className='text-white text-center py-5'>
+          <h4 className="text-white text-center py-5">
             Your Favorite Movies:
           </h4>
-
+          <FavoriteMovies />
         </Col>
       </Row>
 

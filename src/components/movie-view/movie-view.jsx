@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, ButtonGroup, Col, Row, Container } from 'react-bootstrap';
-import Link from 'react-router-dom';
-import { GenreView } from '../genre-view/genre-view';
+import React from "react";
+import PropTypes from "prop-types";
+import { Button, ButtonGroup, Col, Row, Container } from "react-bootstrap";
+import Link from "react-router-dom";
+import { GenreView } from "../genre-view/genre-view";
 
-import movieviewscss from './movie-view.scss';
+import movieviewscss from "./movie-view.scss";
 
 export class MovieView extends React.Component {
 
@@ -15,12 +15,12 @@ export class MovieView extends React.Component {
 
   //Adding event listener "keypress"
   componentDidMount() {                   //the callback function from above
-    document.addEventListener('keypress', this.keypressCallBack);
+    document.addEventListener("keypress", this.keypressCallBack);
   }*/
 
   //Removing the event listener
   //componentWillUnmount() {
-  //document.removeEventListener('keypress', this.keypressCallBack);
+  //document.removeEventListener("keypress", this.keypressCallBack);
   //}
 
   render() {

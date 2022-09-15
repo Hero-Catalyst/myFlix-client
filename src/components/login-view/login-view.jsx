@@ -1,35 +1,35 @@
 //Hook
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 //Component
 export function LoginView(props) {
-  //Calling the useState method with initial value(''), method returns destructured pair values
-  //Assigns current state value ('') to username, and assigns method that updates username to setUsername
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  //Calling the useState method with initial value(""), method returns destructured pair values
+  //Assigns current state value ("") to username, and assigns method that updates username to setUsername
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   //Decalre hook for each input 
-  const [usernameErr, setUsernameErr] = useState('');
-  const [passwordErr, setPasswordErr] = useState('');
+  const [usernameErr, setUsernameErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
 
   //validate user inputs
   const validate = () => {
     let isReq = true;
     if (!username) {
-      setUsernameErr('Username Required');
+      setUsernameErr("Username Required");
       isReq = false;
     } else if (username.length < 5) {
-      setUsernameErr('Username must be 5 characters long');
+      setUsernameErr("Username must be 5 characters long");
       isReq = false;
     }
     if (!password) {
-      setPasswordErr('Password Required');
+      setPasswordErr("Password Required");
       isReq = false;
     } else if (password.length < 8) {
-      setPassword('Password must be 8 characters long');
+      setPassword("Password must be 8 characters long");
       isReq = false;
     }
     return isReq
@@ -41,7 +41,7 @@ export function LoginView(props) {
     const isReq = validate();
     if (isReq) {
       //Send request to the server for authentication
-      axios.post('https://myflix-movieapi-76028.herokuapp.com/login', {
+      axios.post("https://myflix-movieapi-76028.herokuapp.com/login", {
         Username: username,
         Password: password
       })
@@ -50,7 +50,7 @@ export function LoginView(props) {
           props.onLoggedIn(data);
         })
         .catch(e => {
-          console.log('no such user')
+          console.log("no such user")
         });
     }
   };

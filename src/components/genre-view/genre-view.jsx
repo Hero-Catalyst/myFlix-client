@@ -1,6 +1,6 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import React from "react";
+import { Card } from "react-bootstrap";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 
 
@@ -14,17 +14,17 @@ export class GenreView extends React.Component {
   }
 
   componentDidMount() {
-    let accessToken = localStorage.getItem('token');
+    let accessToken = localStorage.getItem("token");
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('user')
+        user: localStorage.getItem("user")
       });
       this.getGenres(accessToken);
     }
   }
 
   getGenres(token) {
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/genres', {
+    axios.get("https://myflix-movieapi-76028.herokuapp.com/genres", {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {

@@ -1,10 +1,10 @@
-import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Button, Card, Col } from 'react-bootstrap';
+import React from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Button, Card, Col } from "react-bootstrap";
 
 
-export function FavoriteMovies({ favoriteMovieList }) {
+export function FavoriteMovies() {
 
   const { favoriteMovies, setFavoriteMovies } = useState([]);
 
@@ -18,9 +18,7 @@ export function FavoriteMovies({ favoriteMovieList }) {
       .catch(function (error) {
         console.log(error);
       });
-    if (favoriteMovies.length < 1) {
-      return ("Looks like you need some movies!")
-    }
+
   };
 
 

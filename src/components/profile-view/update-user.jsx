@@ -1,48 +1,48 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import React, { useState } from "react";
+import axios from "axios";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 
 
 export function UpdateUser(props) {
   const { user } = props;
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [birthday, setBirthday] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [values, setValues] = useState({
-    usernameErr: '',
-    passwordErr: '',
-    emailErr: '',
+    usernameErr: "",
+    passwordErr: "",
+    emailErr: "",
   });
 
   const validate = () => {
     let isReq = true;
     if (!username) {
-      setValues({ ...values, usernameErr: 'Username required' });
+      setValues({ ...values, usernameErr: "Username required" });
       isReq = false;
     } else if (username.length < 2) {
       setValues({
         ...values,
-        usernameErr: 'Username must be at tleast 2 characters long',
+        usernameErr: "Username must be at tleast 2 characters long",
       });
       isReq = false;
     }
     if (!password) {
-      setValues({ ...values, passwordErr: 'Password required' });
+      setValues({ ...values, passwordErr: "Password required" });
       isReq = false;
     } else if (password.length < 8) {
       setValues({
         ...values,
-        passwordErr: 'Password must be at least 8 characters long',
+        passwordErr: "Password must be at least 8 characters long",
       });
       isReq = false;
     }
     if (!email) {
-      setValues({ ...values, emailErr: 'Email required' });
+      setValues({ ...values, emailErr: "Email required" });
       isReq = false;
-    } else if (email.indexOf('@') === -1) {
-      setValues({ ...values, emailErr: 'Enter valid email' });
+    } else if (email.indexOf("@") === -1) {
+      setValues({ ...values, emailErr: "Enter valid email" });
       isReq = false;
     }
     return isReq;
@@ -52,7 +52,7 @@ export function UpdateUser(props) {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       axios.put(`https://myflix-movieapi-76028.herokuapp.com/users/${user.Username}`,
         {
           Username: username,
@@ -69,14 +69,14 @@ export function UpdateUser(props) {
           setPassword(response.data.Password);
           setEmail(response.data.Email);
           setBirthday(response.data.Birthday);
-          // localStorage.removeItem('user');
-          localStorage.setItem('user', username);
-          // alert('Profile was successfully updated.');
-          window.open(`/users/${username}`, '_self');
+          // localStorage.removeItem("user");
+          localStorage.setItem("user", username);
+          // alert("Profile was successfully updated.");
+          window.open(`/users/${username}`, "_self");
         })
         .catch((error) => {
           console.error(error);
-          alert('Unable to update profile.')
+          alert("Unable to update profile.")
         });
     }
   };
@@ -85,63 +85,63 @@ export function UpdateUser(props) {
 
 
   return (
-    <Container id='update-form' className='mt-5'>
+    <Container id="update-form" className="mt-5">
       <Row>
-        <h3 className='mx-auto text-center'>Edit Profile</h3>
+        <h3 className="mx-auto text-center">Edit Profile</h3>
       </Row>
-      <Row className='text-center'>
-        <Col sm='10' md='8' lg='6'>
-          <Form className='text-left'>
-            <Form.Group controlId='formUsername'>
+      <Row className="text-center">
+        <Col sm="10" md="8" lg="6">
+          <Form className="text-left">
+            <Form.Group controlId="formUsername">
               <Form.Label>Username:</Form.Label>
               <Form.Control
-                type='text'
+                type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder='Username'
+                placeholder="Username"
                 required
               />
               {/* display validation error */}
               {values.usernameErr && <p>{values.usernameErr}</p>}
             </Form.Group>
-            <Form.Group controlId='formPassword'>
+            <Form.Group controlId="formPassword">
               <Form.Label>Password:</Form.Label>
               <Form.Control
-                type='password'
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder='Password'
+                placeholder="Password"
                 required
               />
               {/* display validation error */}
               {values.passwordErr && <p>{values.passwordErr}</p>}
             </Form.Group>
-            <Form.Group controlId='formEmail'>
+            <Form.Group controlId="formEmail">
               <Form.Label>Email:</Form.Label>
               <Form.Control
-                type='text'
+                type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder='example@preferredemail.com'
+                placeholder="example@preferredemail.com"
                 required
               />
               {/* display validation error */}
               {values.emailErr && <p>{values.emailErr}</p>}
             </Form.Group>
-            <Form.Group controlId='formBirthday'>
+            <Form.Group controlId="formBirthday">
               <Form.Label>Birthday:</Form.Label>
               <Form.Control
-                type='text'
+                type="text"
                 value={birthday}
                 onChange={(e) => setBirthday(e.target.value)}
-                placeholder='YYYY-MM-DD'
+                placeholder="YYYY-MM-DD"
               />
             </Form.Group>
-            <Form.Group controlId='formBirthday' className='mt-3'>
+            <Form.Group controlId="formBirthday" className="mt-3">
               <Button
-                id='open-button'
-                variant='warning'
-                type='submit'
+                id="open-button"
+                variant="warning"
+                type="submit"
                 onClick={handleSubmit}
               >
                 Update profile

@@ -1,30 +1,30 @@
-import React from 'react';
+import React from "react";
 //use axios to fetch movie database
-import axios from 'axios';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { Row, Col, Button, Container } from 'react-bootstrap';
+import axios from "axios";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { Row, Col, Button, Container } from "react-bootstrap";
 
-import { Menubar } from '../navigation/navbar';
+import { Menubar } from "../navigation/navbar";
 
 //importing view components
-import { LoginView } from '../login-view/login-view';
-import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
+import { LoginView } from "../login-view/login-view";
+import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
 //needs code 
-import { DirectorView } from '../director-view/director-view';
+import { DirectorView } from "../director-view/director-view";
 //needs code 
-import { GenreView } from '../genre-view/genre-view';
+import { GenreView } from "../genre-view/genre-view";
 //needs code 
-import { ProfileView } from '../profile-view/profile-view';
-import { RegistrationView } from '../registration-view/registration-view';
+import { ProfileView } from "../profile-view/profile-view";
+import { RegistrationView } from "../registration-view/registration-view";
 
 
 
 export class MainView extends React.Component {
 
   constructor() {
-    //Super calls the parent "React.Component", which will give the class the actual React compnonent's features
-    //Also initializes the component's "this" variable - super is mandatory for including "constructor()" method in component
+    //Super calls the parent "React.Component", which will give the class the actual React compnonent"s features
+    //Also initializes the component"s "this" variable - super is mandatory for including "constructor()" method in component
     super();
     //Code executed right when the component is created in memory - happens before "render"
     this.state = {
@@ -34,16 +34,16 @@ export class MainView extends React.Component {
   }
 
   componentDidMount() {
-    let accessToken = localStorage.getItem('token');
+    let accessToken = localStorage.getItem("token");
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('user')
+        user: localStorage.getItem("user")
       });
       this.getMovies(accessToken);
     }
   }
 
-  /* When a user successfully logs in, this function updates the 'user'
+  /* When a user successfully logs in, this function updates the "user"
  property in state to that *particular user */
   onLoggedIn(authData) {
     console.log(authData);
@@ -51,13 +51,13 @@ export class MainView extends React.Component {
       user: authData.user.Username
     });
 
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
+    localStorage.setItem("token", authData.token);
+    localStorage.setItem("user", authData.user.Username);
     this.getMovies(authData.token);
   }
 
   getMovies(token) {
-    axios.get('https://myflix-movieapi-76028.herokuapp.com/movies', {
+    axios.get("https://myflix-movieapi-76028.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
