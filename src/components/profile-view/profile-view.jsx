@@ -9,8 +9,10 @@ import { UpdateUser } from "./update-user";
 import { FavoriteMovies } from "./favorite-movies";
 
 //Component Start
-export function ProfileView() {
+export function ProfileView(props) {
   //HOOK useState
+  const { movies } = props;
+
   const [user, setUser] = useState("");
 
   const currentUser = localStorage.getItem("user");
@@ -38,8 +40,8 @@ export function ProfileView() {
   const handleUpdate = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setUser(values => ({ ...values, [name]: value }))
-  }
+    setUser((values) => ({ ...values, [name]: value }))
+  };
 
   const removeFav = (id) => {
     //function for remove favorite movie button
@@ -55,6 +57,7 @@ export function ProfileView() {
           <h3 className="text-white text-center"> {user.Email}</h3>
         </Col>
       </Row>
+
       <Row>
         <Col>
           <h4 className="text-white text-center py-5">
@@ -63,12 +66,16 @@ export function ProfileView() {
           <UpdateUser user={user} />
         </Col>
       </Row>
+
       <Row>
         <Col>
           <h4 className="text-white text-center py-5">
             Your Favorite Movies:
           </h4>
           <FavoriteMovies
+            movies={movies}
+            favoriteMovies={user.FavoriteMovies ?
+              user.FavoriteMovies : []}
           />
         </Col>
       </Row>
