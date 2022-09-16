@@ -4,23 +4,14 @@ import { Link } from "react-router-dom";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
 
-export function FavoriteMovies() {
+export function FavoriteMovies(props) {
 
-  const { favoriteMovies, setFavoriteMovies } = useState("");
+  const { movies, favoriteMovies } = props;
 
 
-  const favoriteMovieList = (token, user) => {
-    axios.get(`https://myflix-movieapi-76028.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then((response) => {
-        setFavoriteMovies(response.data.FavoriteMovies);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-  };
+  const favoriteMovieList = movies.filter((m) => {
+    return favoriteMovies.includes(m._id);
+  });
 
 
 
@@ -31,8 +22,11 @@ export function FavoriteMovies() {
           {favoriteMovieList.map((movie) => {
             return (
               <Card key={movie._id}>
-
-                <Card.Img variant-="top" crossOrigin="anonymous" src={movie.ImagePath} />
+                <Card.Img
+                  variant-="top"
+                  crossOrigin="anonymous"
+                  src={movie.ImagePath}
+                />
                 <Card.Body>
                   <Card.Title>{movie.Title}</Card.Title>
                   <Card.Text>{movie.Description}</Card.Text>
@@ -41,11 +35,10 @@ export function FavoriteMovies() {
                   </Link>
                 </Card.Body>
               </Card>
-            )
-          })
-          }
+            );
+          })}
         </Col>
       </Row>
     </Container>
-  )
+  );
 }
