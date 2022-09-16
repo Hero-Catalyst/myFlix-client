@@ -3,10 +3,26 @@ import PropTypes from "prop-types";
 import { Button, ButtonGroup, Col, Row, Container } from "react-bootstrap";
 import Link from "react-router-dom";
 import { GenreView } from "../genre-view/genre-view";
-
+import axios from "axios";
 import movieviewscss from "./movie-view.scss";
 
 export class MovieView extends React.Component {
+
+  addToFavortieList(movieId) {
+    const currentUser = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    axios.post(`https://myflix-movieapi-76028.herokuapp.com/users/${currentUser}/movies/${movieId}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((response) => {
+        console.log(response.data);
+        alert("The movies was successfully added to your list!");
+      })
+      .catch((error) => console.error(error));
+  }
 
   render() {
     const { movie, onBackClick } = this.props;
@@ -64,7 +80,9 @@ export class MovieView extends React.Component {
           <Col md={8}>
             <ButtonGroup size="lg">
               <Button onClick={() => { onBackClick(null); }}>Back</Button>
-              <Button variant="info" onClick={() => { }}>Add to Favorites</Button>
+
+              <Button variant="info" onClick={() => this.addToFavortieList(movie._id)}>
+                Add to Favorites</Button>
 
             </ButtonGroup>
           </Col>
