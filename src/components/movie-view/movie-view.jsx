@@ -101,4 +101,4 @@ MovieView.propTypes = {
     Genre: PropTypes.string.isRequired,
     Director: PropTypes.string.isRequired,
   }).isRequired
-}
+};
