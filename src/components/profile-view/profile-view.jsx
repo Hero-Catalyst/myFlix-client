@@ -43,8 +43,19 @@ export function ProfileView(props) {
     setUser((values) => ({ ...values, [name]: value }))
   };
 
-  const removeFav = (id) => {
+  const removeFav = () => {
     //function for remove favorite movie button
+    axios.delete(`https://myflix-movieapi-76028.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((respone) => {
+        alert("Movie was removed from your favorites.");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
   };
 
 

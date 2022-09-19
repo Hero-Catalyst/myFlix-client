@@ -8,10 +8,28 @@ export function FavoriteMovies(props) {
 
   const { movies, favoriteMovies } = props;
 
+  const currentUser = localStorage.getItem("user");
+  const token = localStorage.getItem("token");
+
 
   const favoriteMovieList = movies.filter((m) => {
     return favoriteMovies.includes(m._id);
   });
+
+  const removeFav = (movie, user) => {
+    //function for remove favorite movie button
+    axios.delete(`https://myflix-movieapi-76028.herokuapp.com/users/${user}/movies/${movie._id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        alert("Movie was removed from your favorites.");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  };
 
 
 
@@ -33,6 +51,9 @@ export function FavoriteMovies(props) {
                   <Link to={`/movies/${movie._id}`}>
                     <Button variant="link">Open</Button>
                   </Link>
+                  <Button variant="warning" onClick={() => removeFav(movie._id)}>
+                    Remove
+                  </Button>
                 </Card.Body>
               </Card>
             );
