@@ -18,11 +18,11 @@ export function FavoriteMovies(props) {
 
   const removeFav = (movie, user) => {
     //function for remove favorite movie button
-    axios.delete(`https://myflix-movieapi-76028.herokuapp.com/users/${user}/movies/${movie._id}`,
+    axios.delete(`https://myflix-movieapi-76028.herokuapp.com/users/${currentUser}/movies/${movie._id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => {
+      .then((response) => {
         alert("Movie was removed from your favorites.");
       })
       .catch((err) => {
